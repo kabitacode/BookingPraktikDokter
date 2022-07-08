@@ -1,14 +1,32 @@
-<?php 
- include_once("../config.php");
-//  session_start();
-  
-// //  if (!isset($_SESSION['username'])) {
-// //      header("Location: login.php");
-// //  }
+<?php
 
- $result = mysqli_query($conn, "SELECT * FROM pasien ORDER BY id ASC");
- 
- ?>
+include_once("../../config.php");
+
+if (isset($_POST['update'])) {
+    $id = $_POST['id'];
+    $tglJadwal = $_POST['tglJadwal'];
+    $jam = $_POST['jam'];
+    $harga = $_POST['harga'];
+
+    
+    $result = mysqli_query($conn, "UPDATE jadwal SET tglJadwal='$tglJadwal', jam='$jam', harga='$harga' WHERE id=$id");
+
+    echo "<script>alert('Data berhasil di edit!');</script>";
+    echo("<script>window.location = './jadwal.php';</script>");
+}
+
+$id = $_GET['id'];
+
+$result = mysqli_query($conn, "SELECT * FROM jadwal WHERE id=$id");
+
+while ($user_data = mysqli_fetch_array($result)) {
+    $id = $user_data['id'];
+    $tglJadwal = $user_data['tglJadwal'];
+    $jam = $user_data['jam'];
+    $harga = $user_data['harga'];
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,14 +42,14 @@
     <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="../css/styles.css" rel="stylesheet">
+    <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
 
 </head>
 
@@ -55,10 +73,20 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="home.php">
+            <li class="nav-item">
+                <a class="nav-link" href="../home.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../pasien.php">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Pasien</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="./jadwal.php">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Jadwal</span></a>
             </li>
 
             <!-- Divider -->
@@ -114,54 +142,32 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-5">
-                        <h1 class="h3 mb-0 text-gray-800">Tambah Data</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Edit Data Jadwal</h1>
                     </div>
 
 
                     <form id="form" action="" method="POST">
-                        <div class="mb-3">
-                            <label for="namaPasien" class="form-label">Kode Pasien</label>
-                            <input placeholder="Kode Pasien" class="form-control" type="text" name="kodePasien"
-                                id="kodePasien">
+                    <div class="mb-3">
+                            <label for="tglJadwal" class="form-label">Tanggal Jadwal</label>
+                            <input type="date" class="form-control" name="tglJadwal" id="tglJadwal"
+                                value="<?php echo $tglJadwal; ?>">
                         </div>
                         <div class="mb-3">
-                            <label for="namaPasien" class="form-label">Nama Pasien</label>
-                            <input placeholder="Nama Pasien" class="form-control" type="text" name="namaPasien"
-                                id="namaPasien">
+                            <label for="jam" class="form-label">Jam</label>
+                            <input type="time" class="form-control" name="jam" id="jam"
+                                value="<?php echo $jam; ?>">
                         </div>
                         <div class="mb-3">
-                            <label for="tglLahir" class="form-label">Tanggal Lahir</label>
-                            <input type="date" class="form-control" name="tglLahir" id="tgllahir">
+                            <label for="harga" class="form-label">Harga</label>
+                            <input placeholder="Harga" class="form-control" type="number" name="harga" id="harga"
+                                value="<?php echo $harga; ?>">
                         </div>
-                        <div class="mb-3">
-                            <label for="noTelp" class="form-label">No Telepon</label>
-                            <input placeholder="No Telepon" class="form-control" type="text" name="noTelp" id="noTelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="alamat" class="form-label">Alamat</label>
-                            <textarea placeholder="Alamat" class="form-control" name="alamat" id="alamat"></textarea>
-                        </div>
+                        <input type="hidden" name="id" value="<?php echo $id ?>">
+                        <button type="submit" class="btn btn-primary" name="update" id="update"
+                            value="update">Update</button>
 
-                        <button name="submit" class="btn btn-primary" type="submit" name="submit"
-                            id="submit">Submit</button>
                     </form>
 
-                    <?php
-        if (isset($_POST['submit'])) {
-            $kodePasien = $_POST['kodePasien'];
-            $namaPasien = $_POST['namaPasien'];
-            $alamat = $_POST['alamat'];
-            $noTelp = $_POST['noTelp'];
-            $tglLahir = $_POST['tglLahir'];
-
-            include_once("../config.php");
-
-            $result = mysqli_query($conn, "INSERT INTO pasien(kodePasien,namaPasien, alamat, noTelp, tglLahir) VALUES('$kodePasien','$namaPasien', '$alamat', '$noTelp','$tglLahir')");
-
-            echo "<script>alert('Behasil menambahkan data pasien!');</script>";
-            echo ("<script>window.location = './pasien.php';</script>");
-        }
-        ?>
 
                 </div>
                 <!-- End of Main Content -->
@@ -208,14 +214,14 @@
         </div>
 
         <!-- Bootstrap core JavaScript-->
-        <script src="../vendor/jquery/jquery.min.js"></script>
-        <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../../vendor/jquery/jquery.min.js"></script>
+        <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
         <!-- Custom scripts for all pages-->
-        <script src="../js/sb-admin-2.min.js"></script>
+        <script src="../../js/sb-admin-2.min.js"></script>
 
 
 

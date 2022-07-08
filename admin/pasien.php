@@ -6,7 +6,7 @@
 // //      header("Location: login.php");
 // //  }
 
- $result = mysqli_query($conn, "SELECT * FROM booking ORDER BY id ASC");
+ $result = mysqli_query($conn, "SELECT * FROM pasien ORDER BY id ASC");
  
  ?>
 
@@ -64,6 +64,11 @@
                 <a class="nav-link" href="./pasien.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Pasien</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./jadwal/jadwal.php">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Jadwal</span></a>
             </li>
 
             <!-- Divider -->
@@ -127,13 +132,14 @@
 
                     <div class="container table-responsive">
                         <table class="table table-bordered table-hover">
-                            <thead class="thead-dark">
+                        <thead class="thead-dark">
                                 <tr>
-                                    <th scope="col">No</th>
+                                    <th scope="col">No</th> 
+                                    <th scope="col">Kode Pasien</th>
                                     <th scope="col">Nama Pasien</th>
-                                    <th scope="col">Tanggal Lahir Pasien</th>
+                                    <th scope="col">Tanggal Lahir</th>
                                     <th scope="col">No Telpon</th>
-                                    <th scope="col">Alamat</th>
+                                    <th scope="col">Alamat</th> 
                                     <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
@@ -143,6 +149,7 @@
             while ($user_data = mysqli_fetch_array($result)) {
                 echo "<tr>";
                 echo "<td>" . $no++ . "</td>";
+                echo "<td>" . $user_data['kodePasien'] . "</td>";
                 echo "<td>" . $user_data['namaPasien'] . "</td>";
                 echo "<td>" . date('d-m-Y', strtotime($user_data['tglLahir'])) . "</td>";
                 echo "<td>" . $user_data['noTelp'] . "</td>";

@@ -1,12 +1,12 @@
 <?php 
- include_once("../config.php");
- session_start();
+ include_once("../../config.php");
+//  session_start();
   
 // //  if (!isset($_SESSION['username'])) {
 // //      header("Location: login.php");
 // //  }
 
- $result = mysqli_query($conn, "SELECT booking.id, pasien.namaPasien, jadwal.tglJadwal FROM booking join pasien on booking.id_pasien = pasien.id join jadwal on booking.id_jadwal = jadwal.id ORDER BY booking.id ASC");
+ $result = mysqli_query($conn, "SELECT * FROM jadwal ORDER BY id ASC");
  
  ?>
 
@@ -24,14 +24,14 @@
     <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="../css/styles.css" rel="stylesheet">
+    <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
 
 </head>
 
@@ -55,18 +55,18 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="./home.php">
+            <li class="nav-item">
+                <a class="nav-link" href="../home.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./pasien.php">
+                <a class="nav-link" href="../pasien.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Pasien</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./jadwal/jadwal.php">
+            <li class="nav-item active">
+                <a class="nav-link" href="./jadwal.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Jadwal</span></a>
             </li>
@@ -124,8 +124,9 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between">
-                        <h1 class="h3 mb-0 text-gray-800">Booking</h1>
-                        <a href="../admin/booking/tambah.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
+                        <h1 class="h3 mb-0 text-gray-800">Jadwal Dokter</h1>
+                        <a href="../jadwal/tambah.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
+                        
                     </div>
 
 
@@ -134,8 +135,9 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">No</th> 
-                                    <th scope="col">Tanggal Jadwal </th>
-                                    <th scope="col">Nama Pasien</th>
+                                    <th scope="col">Tanggal Yang bisa di booking</th>
+                                    <th scope="col">Jam</th>
+                                    <th scope="col">Harga</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
@@ -146,8 +148,9 @@
                 echo "<tr>";
                 echo "<td>" . $no++ . "</td>";
                 echo "<td>" . date('d-m-Y', strtotime($user_data['tglJadwal'])) . "</td>";
-                echo "<td>" . $user_data['namaPasien'] . "</td>";
-                echo "<td> <a class='btn btn-primary mr-2' href='../admin/booking/edit.php?id=$user_data[id]'><i class='fas fa-edit fa-sm text-white'></i> Edit</a><a class='btn btn-danger' href='../admin/booking/hapus.php?id=$user_data[id]'><i class='fas fa-trash fa-sm text-white mr-1'></i>Hapus</a></td>";
+                echo "<td>" . date('H:i', strtotime($user_data['jam']))  . "</td>";
+                echo "<td>" . 'Rp. ' . number_format($user_data['harga']) . "</td>";
+                echo "<td> <a class='btn btn-primary mr-2' href='edit.php?id=$user_data[id]'><i class='fas fa-edit fa-sm text-white'></i> Edit</a><a class='btn btn-danger' href='hapus.php?id=$user_data[id]'><i class='fas fa-trash fa-sm text-white mr-1'></i>Hapus</a></td>";
                 echo "</tr>";
             }
 
@@ -203,14 +206,14 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
+    <script src="../../js/sb-admin-2.min.js"></script>
 
 
 

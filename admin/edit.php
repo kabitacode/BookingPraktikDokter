@@ -4,30 +4,30 @@ include_once("../config.php");
 
 if (isset($_POST['update'])) {
     $id = $_POST['id'];
+    $kodePasien = $_POST['kodePasien'];
     $namaPasien = $_POST['namaPasien'];
     $alamat = $_POST['alamat'];
     $noTelp = $_POST['noTelp'];
-    $tglBooking = $_POST['tglBooking'];
     $tglLahir = $_POST['tglLahir'];
 
     
-    $result = mysqli_query($conn, "UPDATE booking SET namaPasien='$namaPasien', alamat='$alamat', noTelp='$noTelp', tglBooking='$tglBooking', 
+    $result = mysqli_query($conn, "UPDATE pasien SET kodePasien='$kodePasien', namaPasien='$namaPasien', alamat='$alamat', noTelp='$noTelp',
     tglLahir='$tglLahir' WHERE id=$id");
 
     echo "<script>alert('Data berhasil di edit!');</script>";
-    echo("<script>window.location = './home.php';</script>");
+    echo("<script>window.location = './pasien.php';</script>");
 }
 
 $id = $_GET['id'];
 
-$result = mysqli_query($conn, "SELECT * FROM booking WHERE id=$id");
+$result = mysqli_query($conn, "SELECT * FROM pasien WHERE id=$id");
 
 while ($user_data = mysqli_fetch_array($result)) {
     $id = $user_data['id'];
+    $kodePasien = $user_data['kodePasien'];
     $namaPasien = $user_data['namaPasien'];
     $alamat = $user_data['alamat'];
     $noTelp = $user_data['noTelp'];
-    $tglBooking = $user_data['tglBooking'];
     $tglLahir = $user_data['tglLahir'];
 }
 
@@ -110,7 +110,7 @@ while ($user_data = mysqli_fetch_array($result)) {
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="../img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="../image/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -143,6 +143,10 @@ while ($user_data = mysqli_fetch_array($result)) {
 
                     <form id="form" action="" method="POST">
                         <div class="mb-3">
+                            <label for="kodePasien" class="form-label">Kode Pasien</label>
+                            <input placeholder="Kode Pasien"  class="form-control" type="text" name="kodePasien" id="kodePasien" value="<?php echo $kodePasien; ?>">
+                        </div>
+                        <div class="mb-3">
                             <label for="namaPasien" class="form-label">Nama Pasien</label>
                             <input placeholder="Nama Pasien"  class="form-control" type="text" name="namaPasien" id="namaPasien" value="<?php echo $namaPasien; ?>">
                         </div>
@@ -158,11 +162,6 @@ while ($user_data = mysqli_fetch_array($result)) {
                             <label for="alamat" class="form-label">Alamat</label>
                             <textarea placeholder="Alamat" class="form-control" name="alamat" id="alamat"><?php echo $alamat; ?></textarea>
                         </div>
-                        <div class="mb-3">
-                            <label for="tglBooking" class="form-label">Tanggal Booking</label>
-                            <input type="date"  class="form-control" name="tglBooking" id="tglBooking" value="<?php echo $tglBooking; ?>">
-                        </div>
-
                             <input type="hidden" name="id" value="<?php echo $id ?>">
         <button type="submit" class="btn btn-primary" name="update" id="update" value="update">Update</button>
 
