@@ -2,9 +2,9 @@
  include_once("../config.php");
  session_start();
   
-// //  if (!isset($_SESSION['username'])) {
-// //      header("Location: login.php");
-// //  }
+  if (!isset($_SESSION['username'])) {
+      header("Location: ../login.php");
+ }
 
  $result = mysqli_query($conn, "SELECT booking.id, pasien.namaPasien, jadwal.tglJadwal FROM booking join pasien on booking.id_pasien = pasien.id join jadwal on booking.id_jadwal = jadwal.id ORDER BY booking.id ASC");
  
@@ -21,7 +21,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Admin</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -30,7 +30,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/admin.min.css" rel="stylesheet">
     <link href="../css/styles.css" rel="stylesheet">
 
 </head>
@@ -58,15 +58,15 @@
             <li class="nav-item active">
                 <a class="nav-link" href="./home.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Booking</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./pasien.php">
+                <a class="nav-link" href="../admin/pasien/pasien.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Pasien</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./jadwal/jadwal.php">
+                <a class="nav-link" href="../jadwal/jadwal.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Jadwal</span></a>
             </li>
@@ -96,8 +96,8 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="../img/undraw_profile.svg">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['username'] ?></span>
+                                <img class="img-profile rounded-circle" src="../image/logo-profile.png">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -210,7 +210,7 @@
     <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
+    <script src="../js/admin.min.js"></script>
 
 
 

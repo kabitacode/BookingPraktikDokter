@@ -39,16 +39,16 @@ while ($user_data = mysqli_fetch_array($result)) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Admin</title>
 
-    <!-- Custom fonts for this template-->
+    <!-- Fonts -->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- Style -->
+    <link href="../../css/admin.min.css" rel="stylesheet">
     <link href="../../css/styles.css" rel="stylesheet">
 
 </head>
@@ -62,9 +62,9 @@ while ($user_data = mysqli_fetch_array($result)) {
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="./home.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../home.php">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <i class="fas fa-stethoscope"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">e-Dok</div>
             </a>
@@ -76,10 +76,10 @@ while ($user_data = mysqli_fetch_array($result)) {
             <li class="nav-item">
                 <a class="nav-link" href="../home.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Booking</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../pasien.php">
+                <a class="nav-link" href="../pasien/pasien.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Pasien</span></a>
             </li>
@@ -220,8 +220,8 @@ while ($user_data = mysqli_fetch_array($result)) {
         <!-- Core plugin JavaScript-->
         <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="../../js/sb-admin-2.min.js"></script>
+        <!-- Script -->
+        <script src="../../js/admin.min.js"></script>
 
 
 

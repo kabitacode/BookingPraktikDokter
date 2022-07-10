@@ -1,10 +1,5 @@
 <?php 
- include_once("../config.php");
-//  session_start();
-  
-// //  if (!isset($_SESSION['username'])) {
-// //      header("Location: login.php");
-// //  }
+ include_once("../../config.php");
 
  $result = mysqli_query($conn, "SELECT * FROM pasien ORDER BY id ASC");
  
@@ -21,17 +16,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Admin</title>
 
-    <!-- Custom fonts for this template-->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Fonts -->
+    <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="../css/styles.css" rel="stylesheet">
+    <!-- styles-->
+    <link href="../../css/admin.min.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
 
 </head>
 
@@ -44,9 +39,9 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="./home.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../home.php">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <i class="fas fa-stethoscope"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">e-Dok</div>
             </a>
@@ -56,9 +51,9 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="./home.php">
+                <a class="nav-link" href="../home.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Booking</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="./pasien.php">
@@ -66,7 +61,7 @@
                     <span>Pasien</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./jadwal/jadwal.php">
+                <a class="nav-link" href="../jadwal/jadwal.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Jadwal</span></a>
             </li>
@@ -125,7 +120,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between">
                         <h1 class="h3 mb-0 text-gray-800">Pasien</h1>
-                        <a href="../admin/tambah.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
+                        <a href="../pasien/tambah.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
                         
                     </div>
 
@@ -154,7 +149,7 @@
                 echo "<td>" . date('d-m-Y', strtotime($user_data['tglLahir'])) . "</td>";
                 echo "<td>" . $user_data['noTelp'] . "</td>";
                 echo "<td>" . $user_data['alamat'] . "</td>";
-                echo "<td> <a class='btn btn-primary mr-2' href='edit.php?id=$user_data[id]'><i class='fas fa-edit fa-sm text-white'></i> Edit</a><a class='btn btn-danger' href='hapus.php?id=$user_data[id]'><i class='fas fa-trash fa-sm text-white mr-1'></i>Hapus</a></td>";
+                echo "<td> <a class='btn btn-primary mr-2' href='./edit.php?id=$user_data[id]'><i class='fas fa-edit fa-sm text-white'></i> Edit</a><a class='btn btn-danger' href='./hapus.php?id=$user_data[id]'><i class='fas fa-trash fa-sm text-white mr-1'></i>Hapus</a></td>";
                 echo "</tr>";
             }
 
@@ -167,17 +162,6 @@
 
             </div>
             <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-
         </div>
         <!-- End of Content Wrapper -->
 
@@ -210,14 +194,14 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
+    <!-- Script -->
+    <script src="../../js/admin.min.js"></script>
 
 
 

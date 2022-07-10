@@ -6,7 +6,7 @@ error_reporting(0);
 session_start();
 
 if (isset($_SESSION['username'])) {
-    header("Location: home.php");
+    header("Location: ./admin/home.php");
 }
 
 if (isset($_POST['submit'])) {
@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
       $row =  mysqli_fetch_assoc($result);
       $_SESSION['username'] = $row['username'];
 
-        header("Location: home.php");
+        header("Location: ./admin/home.php");
     } else {
         echo "<script>alert('Email atau password Anda salah. Silahkan coba lagi!')</script>";
     }
