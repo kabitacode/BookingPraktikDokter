@@ -2,6 +2,12 @@
 
 include_once("../../config.php");
 
+session_start();
+  
+if (!isset($_SESSION['username'])) {
+    header("Location: ../../../../login.php");
+}
+
 if (isset($_POST['update'])) {
     $id = $_POST['id'];
     $kodePasien = $_POST['kodePasien'];
@@ -85,12 +91,12 @@ while ($user_data = mysqli_fetch_array($result)) {
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="../pasien/pasien.php">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-fw fa-user-circle"></i>
                     <span>Pasien</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="../jadwal/jadwal.php">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-fw fa-calendar"></i>
                     <span>Jadwal</span></a>
             </li>
 
@@ -119,17 +125,12 @@ while ($user_data = mysqli_fetch_array($result)) {
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="../image/undraw_profile.svg">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['username'] ?></span>
+                                <img class="img-profile rounded-circle" src="../../image/logo-profile.png">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
@@ -154,26 +155,32 @@ while ($user_data = mysqli_fetch_array($result)) {
                     <form id="form" action="" method="POST">
                         <div class="mb-3">
                             <label for="kodePasien" class="form-label">Kode Pasien</label>
-                            <input placeholder="Kode Pasien"  class="form-control" type="text" name="kodePasien" id="kodePasien" value="<?php echo $kodePasien; ?>">
+                            <input placeholder="Kode Pasien" class="form-control" type="text" name="kodePasien"
+                                id="kodePasien" value="<?php echo $kodePasien; ?>">
                         </div>
                         <div class="mb-3">
                             <label for="namaPasien" class="form-label">Nama Pasien</label>
-                            <input placeholder="Nama Pasien"  class="form-control" type="text" name="namaPasien" id="namaPasien" value="<?php echo $namaPasien; ?>">
+                            <input placeholder="Nama Pasien" class="form-control" type="text" name="namaPasien"
+                                id="namaPasien" value="<?php echo $namaPasien; ?>">
                         </div>
                         <div class="mb-3">
                             <label for="tglLahir" class="form-label">Tanggal Lahir</label>
-                            <input type="date" class="form-control" name="tglLahir" id="tgllahir" value="<?php echo $tglLahir; ?>">
+                            <input type="date" class="form-control" name="tglLahir" id="tgllahir"
+                                value="<?php echo $tglLahir; ?>">
                         </div>
                         <div class="mb-3">
                             <label for="noTelp" class="form-label">No Telepon</label>
-                            <input placeholder="No Telepon"  class="form-control" type="text" name="noTelp" id="noTelp" value="<?php echo $noTelp; ?>">
+                            <input placeholder="No Telepon" class="form-control" type="text" name="noTelp" id="noTelp"
+                                value="<?php echo $noTelp; ?>">
                         </div>
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat</label>
-                            <textarea placeholder="Alamat" class="form-control" name="alamat" id="alamat"><?php echo $alamat; ?></textarea>
+                            <textarea placeholder="Alamat" class="form-control" name="alamat"
+                                id="alamat"><?php echo $alamat; ?></textarea>
                         </div>
-                            <input type="hidden" name="id" value="<?php echo $id ?>">
-        <button type="submit" class="btn btn-primary" name="update" id="update" value="update">Update</button>
+                        <input type="hidden" name="id" value="<?php echo $id ?>">
+                        <button type="submit" class="btn btn-primary" name="update" id="update"
+                            value="update">Update</button>
 
                     </form>
 
@@ -198,15 +205,15 @@ while ($user_data = mysqli_fetch_array($result)) {
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-body">Apakah anda yakin ingin keluar dari website ini ?</div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                        <a class="btn btn-primary" href="../logout.php">Keluar</a>
                     </div>
                 </div>
             </div>

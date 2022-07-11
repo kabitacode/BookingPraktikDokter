@@ -1,6 +1,12 @@
 <?php 
  include_once("../../config.php");
 
+ session_start();
+  
+ if (!isset($_SESSION['username'])) {
+     header("Location: ../../../../login.php");
+}
+
  $result = mysqli_query($conn, "SELECT * FROM pasien ORDER BY id ASC");
  
  ?>
@@ -57,12 +63,12 @@
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="./pasien.php">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-fw fa-user-circle"></i>
                     <span>Pasien</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="../jadwal/jadwal.php">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-fw fa-calendar"></i>
                     <span>Jadwal</span></a>
             </li>
 
@@ -91,17 +97,13 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="../image/undraw_profile.svg">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['username'] ?></span>
+                                <img class="img-profile rounded-circle" src="../../image/logo-profile.png">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
@@ -123,7 +125,7 @@
                     </div>
 
 
-                    <form id="form" action="" method="POST">
+                    <form id="form" action="" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="namaPasien" class="form-label">Kode Pasien</label>
                             <input placeholder="Kode Pasien" class="form-control" type="text" name="kodePasien"
@@ -146,6 +148,10 @@
                             <label for="alamat" class="form-label">Alamat</label>
                             <textarea placeholder="Alamat" class="form-control" name="alamat" id="alamat"></textarea>
                         </div>
+                        <div class="mb-3">
+                            <label for="alamat" class="form-label">Foto Pasien</label>
+                            <input type="file" name="fotoPasien" id="fotoPasien" class="form-control">
+                        </div>
 
                         <button name="submit" class="btn btn-primary" type="submit" name="submit"
                             id="submit">Submit</button>
@@ -153,18 +159,28 @@
 
                     <?php
         if (isset($_POST['submit'])) {
+            include_once("../../config.php");
+
             $kodePasien = $_POST['kodePasien'];
             $namaPasien = $_POST['namaPasien'];
             $alamat = $_POST['alamat'];
             $noTelp = $_POST['noTelp'];
             $tglLahir = $_POST['tglLahir'];
+            $fotoPasien = $_FILES['fotoPasien']['name'];
+            
 
-            include_once("../config.php");
+            $path = "berkas/";
 
-            $result = mysqli_query($conn, "INSERT INTO pasien(kodePasien,namaPasien, alamat, noTelp, tglLahir) VALUES('$kodePasien','$namaPasien', '$alamat', '$noTelp','$tglLahir')");
+            move_uploaded_file($_FILES['fotoPasien']['tmp_name'], $path.$fotoPasien);
+
+            $result = mysqli_query($conn, "INSERT INTO pasien(kodePasien,namaPasien, alamat, noTelp, tglLahir, fotoPasien) VALUES('$kodePasien','$namaPasien', '$alamat', '$noTelp','$tglLahir', '$fotoPasien')");
+
+
 
             echo "<script>alert('Behasil menambahkan data pasien!');</script>";
             echo ("<script>window.location = './pasien.php';</script>");
+
+
         }
         ?>
 
@@ -188,15 +204,15 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-body">Apakah anda yakin ingin keluar dari website ini ?</div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                        <a class="btn btn-primary" href="../logout.php">Keluar</a>
                     </div>
                 </div>
             </div>
