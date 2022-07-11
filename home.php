@@ -12,7 +12,6 @@
         rel="stylesheet">
     <!-- Style  -->
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/bootstrap/bootstrap-grid.min.css">
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
     <title>Beranda</title>
 </head>

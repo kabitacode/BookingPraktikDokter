@@ -145,12 +145,17 @@ section {
 	align-items: center;
 }
 
+.container-table {
+	padding-left: 100px !important;
+	padding-right: 100px !important;
+}
+
 hr {
-	width: 250px;
-	height: 3px;
-	background-color: #e07e7b;
-	border: 0;
-	margin-bottom: 50px;
+	width: 250px !important;
+	height: 3px !important;
+	background-color: #e07e7b !important;
+	border: 0 !important;
+	margin-bottom: 50px !important;
 }
 
 section h3.title {
@@ -360,7 +365,6 @@ th {
 td, th { 
 	padding: 10px; 
 	border: 1px solid #ccc; 
-	text-align: center; 
 	font-size: 18px;
 	}
 
