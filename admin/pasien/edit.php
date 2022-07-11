@@ -8,6 +8,20 @@ if (!isset($_SESSION['username'])) {
     header("Location: ../../../../login.php");
 }
 
+$id = $_GET['id'];
+
+
+$row = mysqli_query($conn, "SELECT * FROM pasien WHERE id=$id");
+
+while ($user_data = mysqli_fetch_array($row)) {
+    $id = $user_data['id'];
+    $kodePasien = $user_data['kodePasien'];
+    $namaPasien = $user_data['namaPasien'];
+    $alamat = $user_data['alamat'];
+    $noTelp = $user_data['noTelp'];
+    $tglLahir = $user_data['tglLahir'];
+    $foto = $user_data['fotoPasien'];
+}
 if (isset($_POST['update'])) {
     $id = $_POST['id'];
     $kodePasien = $_POST['kodePasien'];
@@ -15,27 +29,25 @@ if (isset($_POST['update'])) {
     $alamat = $_POST['alamat'];
     $noTelp = $_POST['noTelp'];
     $tglLahir = $_POST['tglLahir'];
-
+    $fotoPasien = $_FILES['fotoPasien']['name']??"";
+    if (empty($fotoPasien)) {
+        $result = mysqli_query($conn, "UPDATE pasien SET kodePasien='$kodePasien', namaPasien='$namaPasien', alamat='$alamat', noTelp='$noTelp',
+        tglLahir='$tglLahir' WHERE id=$id");
+    } else {
+        if(is_file("../../image/".$fotoPasien))
+        unlink("../../image/".$fotoPasien);
+        $path = "../../image/";
+        move_uploaded_file($_FILES['fotoPasien']['tmp_name'], $path.$fotoPasien);
+        $result = mysqli_query($conn, "UPDATE pasien SET kodePasien='$kodePasien', namaPasien='$namaPasien', alamat='$alamat', noTelp='$noTelp',
+        tglLahir='$tglLahir', fotoPasien='$fotoPasien' WHERE id=$id");
+    }
     
-    $result = mysqli_query($conn, "UPDATE pasien SET kodePasien='$kodePasien', namaPasien='$namaPasien', alamat='$alamat', noTelp='$noTelp',
-    tglLahir='$tglLahir' WHERE id=$id");
-
     echo "<script>alert('Data berhasil di edit!');</script>";
     echo("<script>window.location = './pasien.php';</script>");
 }
 
-$id = $_GET['id'];
 
-$result = mysqli_query($conn, "SELECT * FROM pasien WHERE id=$id");
 
-while ($user_data = mysqli_fetch_array($result)) {
-    $id = $user_data['id'];
-    $kodePasien = $user_data['kodePasien'];
-    $namaPasien = $user_data['namaPasien'];
-    $alamat = $user_data['alamat'];
-    $noTelp = $user_data['noTelp'];
-    $tglLahir = $user_data['tglLahir'];
-}
 
 ?>
 
@@ -125,7 +137,8 @@ while ($user_data = mysqli_fetch_array($result)) {
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['username'] ?></span>
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['username'] ?></span>
                                 <img class="img-profile rounded-circle" src="../../image/logo-profile.png">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -144,39 +157,55 @@ while ($user_data = mysqli_fetch_array($result)) {
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid mb-3">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-5">
-                        <h1 class="h3 mb-0 text-gray-800">Tambah Data</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Edit Data Pasien</h1>
                     </div>
 
 
-                    <form id="form" action="" method="POST">
-                        <div class="mb-3">
-                            <label for="kodePasien" class="form-label">Kode Pasien</label>
-                            <input placeholder="Kode Pasien" class="form-control" type="text" name="kodePasien"
-                                id="kodePasien" value="<?php echo $kodePasien; ?>">
+                    <form id="form" action="" method="POST" enctype="multipart/form-data">
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <label for="kodePasien" class="form-label">Kode Pasien</label>
+                                <input placeholder="Kode Pasien" class="form-control" type="text" name="kodePasien"
+                                    id="kodePasien" value="<?php echo $kodePasien; ?>">
+                            </div>
+                            <div class="col-6">
+                                <label for="namaPasien" class="form-label">Nama Pasien</label>
+                                <input placeholder="Nama Pasien" class="form-control" type="text" name="namaPasien"
+                                    id="namaPasien" value="<?php echo $namaPasien; ?>">
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="namaPasien" class="form-label">Nama Pasien</label>
-                            <input placeholder="Nama Pasien" class="form-control" type="text" name="namaPasien"
-                                id="namaPasien" value="<?php echo $namaPasien; ?>">
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <label for="tglLahir" class="form-label">Tanggal Lahir</label>
+                                <input type="date" class="form-control" name="tglLahir" id="tgllahir"
+                                    value="<?php echo $tglLahir; ?>">
+                            </div>
+                            <div class="col-6">
+                                <label for="noTelp" class="form-label">No Telepon</label>
+                                <input placeholder="No Telepon" class="form-control" type="text" name="noTelp"
+                                    id="noTelp" value="<?php echo $noTelp; ?>">
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="tglLahir" class="form-label">Tanggal Lahir</label>
-                            <input type="date" class="form-control" name="tglLahir" id="tgllahir"
-                                value="<?php echo $tglLahir; ?>">
-                        </div>
-                        <div class="mb-3">
-                            <label for="noTelp" class="form-label">No Telepon</label>
-                            <input placeholder="No Telepon" class="form-control" type="text" name="noTelp" id="noTelp"
-                                value="<?php echo $noTelp; ?>">
-                        </div>
-                        <div class="mb-3">
+                        <div class="mb-4">
                             <label for="alamat" class="form-label">Alamat</label>
                             <textarea placeholder="Alamat" class="form-control" name="alamat"
                                 id="alamat"><?php echo $alamat; ?></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label for="noTelp" class="form-label">Foto</label>
+                            <input placeholder="Foto" class="form-control-file" type="file" name="fotoPasien"
+                                id="fotoPasien">
+                            <br>
+                            <?php 
+							if ($foto == "") { ?>
+                            <img src="../../image/logo-profile.png" class="img-profile">
+                            <?php }else{ ?>
+                            <img src="../../image/<?php echo $foto; ?>" class="img-profile">
+                            <?php } ?>
                         </div>
                         <input type="hidden" name="id" value="<?php echo $id ?>">
                         <button type="submit" class="btn btn-primary" name="update" id="update"
@@ -213,7 +242,7 @@ while ($user_data = mysqli_fetch_array($result)) {
                     <div class="modal-body">Apakah anda yakin ingin keluar dari website ini ?</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                        <a class="btn btn-primary" href="../logout.php">Keluar</a>
+                        <a class="btn btn-primary" href="../../logout.php">Keluar</a>
                     </div>
                 </div>
             </div>

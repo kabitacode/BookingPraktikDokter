@@ -144,7 +144,7 @@
             while ($user_data = mysqli_fetch_array($result)) {
                 echo "<tr>";
                 echo "<td>" . $no++ . "</td>";
-                echo "<td>" . date('d-m-Y', strtotime($user_data['tglJadwal'])) . "</td>";
+                echo "<td>" . date('d-m-Y', strtotime($user_data['tglPraktik'])) . "</td>";
                 echo "<td>" . date('H:i', strtotime($user_data['jam']))  . "</td>";
                 echo "<td>" . 'Rp. ' . number_format($user_data['harga']) . "</td>";
                 echo "<td> <a class='btn btn-primary mr-2' href='edit.php?id=$user_data[id]'><i class='fas fa-edit fa-sm text-white'></i> Edit</a><a class='btn btn-danger' href='hapus.php?id=$user_data[id]'><i class='fas fa-trash fa-sm text-white mr-1'></i>Hapus</a></td>";
@@ -186,7 +186,7 @@
                 <div class="modal-body">Apakah anda yakin ingin keluar dari website ini ?</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                    <a class="btn btn-primary" href="../logout.php">Keluar</a>
+                    <a class="btn btn-primary" href="../../logout.php">Keluar</a>
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@
       header("Location: ../login.php");
  }
 
- $result = mysqli_query($conn, "SELECT booking.id, pasien.namaPasien, jadwal.tglJadwal FROM booking join pasien on booking.id_pasien = pasien.id join jadwal on booking.id_jadwal = jadwal.id ORDER BY booking.id ASC");
+ $result = mysqli_query($conn, "SELECT booking.id, pasien.namaPasien, jadwal.tglPraktik FROM booking join pasien on booking.id_pasien = pasien.id join jadwal on booking.id_jadwal = jadwal.id ORDER BY booking.id ASC");
  
  ?>
 
@@ -134,7 +134,7 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">No</th> 
-                                    <th scope="col">Tanggal Jadwal </th>
+                                    <th scope="col">Tanggal Praktik</th>
                                     <th scope="col">Nama Pasien</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
@@ -145,7 +145,7 @@
             while ($user_data = mysqli_fetch_array($result)) {
                 echo "<tr>";
                 echo "<td>" . $no++ . "</td>";
-                echo "<td>" . date('d-m-Y', strtotime($user_data['tglJadwal'])) . "</td>";
+                echo "<td>" . date('d-m-Y', strtotime($user_data['tglPraktik'])) . "</td>";
                 echo "<td>" . $user_data['namaPasien'] . "</td>";
                 echo "<td> <a class='btn btn-primary mr-2' href='../admin/booking/edit.php?id=$user_data[id]'><i class='fas fa-edit fa-sm text-white'></i> Edit</a><a class='btn btn-danger' href='../admin/booking/hapus.php?id=$user_data[id]'><i class='fas fa-trash fa-sm text-white mr-1'></i>Hapus</a></td>";
                 echo "</tr>";

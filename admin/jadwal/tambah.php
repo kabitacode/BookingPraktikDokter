@@ -127,8 +127,8 @@
 
                     <form id="form" action="" method="POST">
                         <div class="mb-3">
-                            <label for="tglJadwal" class="form-label">Tanggal Jadwal</label>
-                            <input type="date" class="form-control" name="tglJadwal" id="tglJadwal">
+                            <label for="tglPraktik" class="form-label">Tanggal Praktik</label>
+                            <input type="date" class="form-control" name="tglPraktik" id="tglPraktik">
                         </div>
                         <div class="mb-3">
                             <label for="jam" class="form-label">Jam</label>
@@ -146,13 +146,13 @@
 
                     <?php
         if (isset($_POST['submit'])) {
-            $tglJadwal = $_POST['tglJadwal'];
+            $tglPraktik = $_POST['tglPraktik'];
             $jam = $_POST['jam'];
             $harga = $_POST['harga'];
 
             include_once("../../config.php");
 
-            $result = mysqli_query($conn, "INSERT INTO jadwal(tglJadwal,jam, harga) VALUES('$tglJadwal','$jam', '$harga')");
+            $result = mysqli_query($conn, "INSERT INTO jadwal(tglPraktik,jam, harga) VALUES('$tglPraktik','$jam', '$harga')");
 
             echo "<script>alert('Behasil menambahkan data jadwal!');</script>";
             echo ("<script>window.location = './jadwal.php';</script>");
@@ -186,7 +186,7 @@
                     <div class="modal-body">Apakah anda yakin ingin keluar dari website ini ?</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                        <a class="btn btn-primary" href="../logout.php">Keluar</a>
+                        <a class="btn btn-primary" href="../../logout.php">Keluar</a>
                     </div>
                 </div>
             </div>

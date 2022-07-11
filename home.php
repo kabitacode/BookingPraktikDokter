@@ -22,16 +22,16 @@
         <h2>e-Dok</h2>
         <nav>
             <li><a href="./home.php" class="active">Beranda</a></li>
-            <li><a href="./profile.php">Profile</a></li>
+            <li><a href="./cek-booking.php">Cek Booking</a></li>
 
-            <?php
+            <!-- <?php
             session_start();
             if (isset($_SESSION['username'])) {
                 echo '<li><a href="./logout.php">Logout</a></li>';
             } else {
                 echo '<li><a href="./login.php">Login</a></li>';
             }   
-            ?> 
+            ?>  -->
             
         </nav>
     </header>

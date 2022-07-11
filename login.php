@@ -40,10 +40,12 @@ if (isset($_POST['submit'])) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
-<body>
+<body class='login'>
 <div class="login-page">
   <div class="form">
     <form class="login-form" action="" method="POST">
+        <h6>Booking Praktik Dokter (e-Dok)</h6>
+        <hr>
         <h6>Login</h6>
         <input type="text" placeholder="Username" name="username" value="<?php echo $_POST['username']; ?>" required>
         <input type="password" placeholder="Password" name="password" value="<?php echo $_POST['password']; ?>" required>

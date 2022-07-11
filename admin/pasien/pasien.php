@@ -99,7 +99,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
                                     class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['username'] ?></span>
-                                 <img class="img-profile rounded-circle" src="../../image/logo-profile.png">
+                                <img class="img-profile rounded-circle" src="../../image/logo-profile.png">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -128,7 +128,6 @@
 
                     </div>
 
-
                     <div class="container table-responsive">
                         <table class="table table-bordered table-hover">
                             <thead class="thead-dark">
@@ -149,27 +148,32 @@
             while ($user_data = mysqli_fetch_array($result)) {
 
                 ?>
-					<tr>
-						<td><?php echo $no++; ?></td>
-						<td><?php echo $user_data['kodePasien']; ?></td>
-						<td><?php echo $user_data['namaPasien']; ?></td>
-						<td><?php echo date('d-m-Y', strtotime($user_data['tglLahir'])); ?></td>
-						<td><?php echo $user_data['noTelp']; ?></td>
-						<td><?php echo $user_data['alamat']; ?></td>
-                        <td>
-							<?php 
+                                <tr>
+                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo $user_data['kodePasien']; ?></td>
+                                    <td><?php echo $user_data['namaPasien']; ?></td>
+                                    <td><?php echo date('d-m-Y', strtotime($user_data['tglLahir'])); ?></td>
+                                    <td><?php echo $user_data['noTelp']; ?></td>
+                                    <td><?php echo $user_data['alamat']; ?></td>
+                                    <td>
+                                        <?php 
 							if ($user_data['fotoPasien'] == "") { ?>
-								<img src="../../image/logo-profile.png" style="width:100px;height:100px;">
-							<?php }else{ ?>
-								<img src="berkas/<?php echo $user_data['fotoPasien']; ?>" style="width:100px;height:100px;">
-							<?php } ?>
-						</td>
-						<td>
-							<a href="./edit.php?id=<?php echo $user_data['id'] ?>" class="btn btn-primary mr-2"><i class='fas fa-edit fa-sm text-white'></i> Edit </a>
-							<a href="./hapus.php?id=<?php echo $user_data['id'] ?>" class="btn btn-danger"><i class='fas fa-trash fa-sm text-white mr-1'></i> Hapus </a>
-						</td>
-					</tr>
-				<?php } ?>
+                                        <img src="../../image/logo-profile.png" class="img-profile">
+                                        <?php }else{ ?>
+                                        <img src="../../image/<?php echo $user_data['fotoPasien']; ?>"
+                                            class="img-profile">
+                                        <?php } ?>
+                                    </td>
+                                    <td>
+                                        <a href="./edit.php?id=<?php echo $user_data['id'] ?>"
+                                            class="btn btn-primary mr-2"><i class='fas fa-edit fa-sm text-white'></i>
+                                            Edit </a>
+                                        <a href="./hapus.php?id=<?php echo $user_data['id'] ?>"
+                                            class="btn btn-danger"><i class='fas fa-trash fa-sm text-white mr-1'></i>
+                                            Hapus </a>
+                                    </td>
+                                </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -203,7 +207,7 @@
                 <div class="modal-body">Apakah anda yakin ingin keluar dari website ini ?</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                    <a class="btn btn-primary" href="../logout.php">Keluar</a>
+                    <a class="btn btn-primary" href="../../logout.php">Keluar</a>
                 </div>
             </div>
         </div>

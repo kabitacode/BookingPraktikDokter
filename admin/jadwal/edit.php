@@ -9,12 +9,12 @@ if (!isset($_SESSION['username'])) {
 
 if (isset($_POST['update'])) {
     $id = $_POST['id'];
-    $tglJadwal = $_POST['tglJadwal'];
+    $tglPraktik = $_POST['tglPraktik'];
     $jam = $_POST['jam'];
     $harga = $_POST['harga'];
 
     
-    $result = mysqli_query($conn, "UPDATE jadwal SET tglJadwal='$tglJadwal', jam='$jam', harga='$harga' WHERE id=$id");
+    $result = mysqli_query($conn, "UPDATE jadwal SET tglPraktik='$tglPraktik', jam='$jam', harga='$harga' WHERE id=$id");
 
     echo "<script>alert('Data berhasil di edit!');</script>";
     echo("<script>window.location = './jadwal.php';</script>");
@@ -26,7 +26,7 @@ $result = mysqli_query($conn, "SELECT * FROM jadwal WHERE id=$id");
 
 while ($user_data = mysqli_fetch_array($result)) {
     $id = $user_data['id'];
-    $tglJadwal = $user_data['tglJadwal'];
+    $tglPraktik = $user_data['tglPraktik'];
     $jam = $user_data['jam'];
     $harga = $user_data['harga'];
 }
@@ -148,9 +148,9 @@ while ($user_data = mysqli_fetch_array($result)) {
 
                     <form id="form" action="" method="POST">
                         <div class="mb-3">
-                            <label for="tglJadwal" class="form-label">Tanggal Jadwal</label>
-                            <input type="date" class="form-control" name="tglJadwal" id="tglJadwal"
-                                value="<?php echo $tglJadwal; ?>">
+                            <label for="tglPraktik" class="form-label">Tanggal Praktik</label>
+                            <input type="date" class="form-control" name="tglPraktik" id="tglPraktik"
+                                value="<?php echo $tglPraktik; ?>">
                         </div>
                         <div class="mb-3">
                             <label for="jam" class="form-label">Jam</label>
@@ -170,17 +170,6 @@ while ($user_data = mysqli_fetch_array($result)) {
 
                 </div>
                 <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2021</span>
-                        </div>
-                    </div>
-                </footer>
-                <!-- End of Footer -->
-
             </div>
             <!-- End of Content Wrapper -->
 
@@ -206,7 +195,7 @@ while ($user_data = mysqli_fetch_array($result)) {
                     <div class="modal-body">Apakah anda yakin ingin keluar dari website ini ?</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                        <a class="btn btn-primary" href="../logout.php">Keluar</a>
+                        <a class="btn btn-primary" href="../../logout.php">Keluar</a>
                     </div>
                 </div>
             </div>

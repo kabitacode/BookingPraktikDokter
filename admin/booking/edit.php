@@ -148,16 +148,16 @@ while ($user_data = mysqli_fetch_array($result)) {
 
                     <form id="form" action="" method="POST">
                         <div class="mb-3">
-                            <label for="tglJadwal" class="form-label">Tanggal Jadwal</label>
+                            <label for="tglPraktik" class="form-label">Tanggal Jadwal</label>
                             <select class="form-control" name="id_jadwal" id="id_jadwal">
                                 <option value="">--- Pilih Tanggal Jadwal Untuk Booking ---</option>
                                 <?php
             $no = 1;
             while ($user_data = mysqli_fetch_array($resultJadwal)) {
                 if ($user_data['id'] == $id_jadwal) {
-                    echo '<option value="'.$user_data['id'].'" selected>' . $user_data['tglJadwal'] . '</option>';
+                    echo '<option value="'.$user_data['id'].'" selected>' . $user_data['tglPraktik'] . '</option>';
                 } else {
-                    echo '<option value="'.$user_data['id'].'">' . $user_data['tglJadwal'] . '</option>';  
+                    echo '<option value="'.$user_data['id'].'">' . $user_data['tglPraktik'] . '</option>';  
                 }
             }
 
@@ -214,7 +214,7 @@ while ($user_data = mysqli_fetch_array($result)) {
                     <div class="modal-body">Apakah anda yakin ingin keluar dari website ini ?</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                        <a class="btn btn-primary" href="../logout.php">Keluar</a>
+                        <a class="btn btn-primary" href="../../logout.php">Keluar</a>
                     </div>
                 </div>
             </div>

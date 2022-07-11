@@ -121,36 +121,43 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-5">
-                        <h1 class="h3 mb-0 text-gray-800">Tambah Data</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Tambah Data Pasien</h1>
                     </div>
 
-
                     <form id="form" action="" method="POST" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="namaPasien" class="form-label">Kode Pasien</label>
-                            <input placeholder="Kode Pasien" class="form-control" type="text" name="kodePasien"
-                                id="kodePasien">
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <label for="namaPasien" class="form-label">Kode Pasien</label>
+                                <input placeholder="Kode Pasien" class="form-control" type="text" name="kodePasien"
+                                    id="kodePasien">
+                            </div>
+                            <div class="col-6">
+                                <label for="namaPasien" class="form-label">Nama Pasien</label>
+                                <input placeholder="Nama Pasien" class="form-control" type="text" name="namaPasien"
+                                    id="namaPasien">
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="namaPasien" class="form-label">Nama Pasien</label>
-                            <input placeholder="Nama Pasien" class="form-control" type="text" name="namaPasien"
-                                id="namaPasien">
+                        <div class="row mb-4">
+                            <div class="mb-3 col-6">
+                                <label for="tglLahir" class="form-label">Tanggal Lahir</label>
+                                <input type="date" class="form-control" name="tglLahir" id="tgllahir">
+                            </div>
+                            <div class="mb-3 col-6">
+                                <label for="noTelp" class="form-label">No Telepon</label>
+                                <input placeholder="No Telepon" class="form-control" type="text" name="noTelp"
+                                    id="noTelp">
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="tglLahir" class="form-label">Tanggal Lahir</label>
-                            <input type="date" class="form-control" name="tglLahir" id="tgllahir">
-                        </div>
-                        <div class="mb-3">
-                            <label for="noTelp" class="form-label">No Telepon</label>
-                            <input placeholder="No Telepon" class="form-control" type="text" name="noTelp" id="noTelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="alamat" class="form-label">Alamat</label>
-                            <textarea placeholder="Alamat" class="form-control" name="alamat" id="alamat"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="alamat" class="form-label">Foto Pasien</label>
-                            <input type="file" name="fotoPasien" id="fotoPasien" class="form-control">
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <label for="alamat" class="form-label">Alamat</label>
+                                <textarea placeholder="Alamat" class="form-control" name="alamat"
+                                    id="alamat"></textarea>
+                            </div>
+                            <div class="col-4">
+                                <label for="alamat" class="form-label">Foto Pasien</label>
+                                <input type="file" name="fotoPasien" id="fotoPasien" class="form-control-file">
+                            </div>
                         </div>
 
                         <button name="submit" class="btn btn-primary" type="submit" name="submit"
@@ -169,18 +176,14 @@
             $fotoPasien = $_FILES['fotoPasien']['name'];
             
 
-            $path = "berkas/";
+            $path = "../../image/";
 
             move_uploaded_file($_FILES['fotoPasien']['tmp_name'], $path.$fotoPasien);
 
             $result = mysqli_query($conn, "INSERT INTO pasien(kodePasien,namaPasien, alamat, noTelp, tglLahir, fotoPasien) VALUES('$kodePasien','$namaPasien', '$alamat', '$noTelp','$tglLahir', '$fotoPasien')");
-
-
-
+            
             echo "<script>alert('Behasil menambahkan data pasien!');</script>";
             echo ("<script>window.location = './pasien.php';</script>");
-
-
         }
         ?>
 
@@ -212,7 +215,7 @@
                     <div class="modal-body">Apakah anda yakin ingin keluar dari website ini ?</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                        <a class="btn btn-primary" href="../logout.php">Keluar</a>
+                        <a class="btn btn-primary" href="../../logout.php">Keluar</a>
                     </div>
                 </div>
             </div>
