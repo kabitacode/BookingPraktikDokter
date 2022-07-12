@@ -1,3 +1,11 @@
+<!-- 
+=========================
+Nama : Muhamad Zulfiqor
+NIM : 1120031025
+Deskripsi Program : Website Booking Praktik Dokter (e-Dok) 
+==========================
+-->
+
 <?php
 
 include_once("../../config.php");
@@ -16,7 +24,7 @@ if (isset($_POST['update'])) {
     
     $result = mysqli_query($conn, "UPDATE jadwal SET tglPraktik='$tglPraktik', jam='$jam', harga='$harga' WHERE id=$id");
 
-    echo "<script>alert('Data berhasil di edit!');</script>";
+    echo "<script>alert('Data jadwal berhasil di edit!');</script>";
     echo("<script>window.location = './jadwal.php';</script>");
 }
 

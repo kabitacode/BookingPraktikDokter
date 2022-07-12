@@ -1,5 +1,13 @@
+<!-- 
+=========================
+Nama : Muhamad Zulfiqor
+NIM : 1120031025
+Deskripsi Program : Website Booking Praktik Dokter (e-Dok) 
+==========================
+-->
+
 <?php
-include 'config.php';
+include './config.php';
 
 error_reporting(0);
 
@@ -35,7 +43,7 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -50,7 +58,7 @@ if (isset($_POST['submit'])) {
         <input type="text" placeholder="Username" name="username" value="<?php echo $_POST['username']; ?>" required>
         <input type="password" placeholder="Password" name="password" value="<?php echo $_POST['password']; ?>" required>
         <button name="submit">login</button>
-      <!-- <p class="message">Not registered? <a href="#">Create an account</a></p> -->
+      <p class="message">Tidak punya akun ? <a href="./registrasi.php">Registrasi Disini</a></p>
     </form>
   </div>
 </div>

@@ -1,3 +1,11 @@
+<!-- 
+=========================
+Nama : Muhamad Zulfiqor
+NIM : 1120031025
+Deskripsi Program : Website Booking Praktik Dokter (e-Dok) 
+==========================
+-->
+
 <?php
 
 include_once("../../config.php");
@@ -42,7 +50,7 @@ if (isset($_POST['update'])) {
         tglLahir='$tglLahir', fotoPasien='$fotoPasien' WHERE id=$id");
     }
     
-    echo "<script>alert('Data berhasil di edit!');</script>";
+    echo "<script>alert('Data pasien berhasil di edit!');</script>";
     echo("<script>window.location = './pasien.php';</script>");
 }
 
