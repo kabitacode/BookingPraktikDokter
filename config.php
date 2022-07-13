@@ -1,11 +1,3 @@
-<!-- 
-=========================
-Nama : Muhamad Zulfiqor
-NIM : 1120031025
-Deskripsi Program : Website Booking Praktik Dokter (e-Dok) 
-==========================
--->
-
 <?php
 $server = 'localhost';
 $user = 'root';
